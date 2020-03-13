@@ -1,21 +1,25 @@
 <template>
     <v-container fluid>
         <v-row>
-            <v-col v-for="(sensor, key) in sensors" :key="key" cols="12" sm="6" md="3" lg="3">
-                <v-card class="ma-3 pa-4 nb-card" tile>
-                    <h2>{{sensor.name}}</h2>
-                    <!-- TODO: Add folding menu here. -->
+            <v-col cols="12" lg="8">
+                <v-row>
+                    <v-col v-for="(sensor, key) in sensors" :key="key" cols="12" sm="6" md="3" lg="3">
+                        <v-card class="ma-3 pa-4 nb-card" tile>
+                            <h2>{{sensor.name}}</h2>
+                            <!-- TODO: Add folding menu here. -->
 
-                    <div class="nb-measurement py-4">
-                        <span class="nb-value">
-                            {{sensor.value}}
-                        </span>
+                            <div class="nb-measurement py-4">
+                                <span class="nb-value">
+                                    {{sensor.value}}
+                                </span>
 
-                        <span class="nb-unit">
-                            {{sensor.unit}}
-                        </span>
-                    </div>
-                </v-card>
+                                <span class="nb-unit">
+                                    {{sensor.unit}}
+                                </span>
+                            </div>
+                        </v-card>
+                    </v-col>
+                </v-row>
             </v-col>
         </v-row>
     </v-container>
