@@ -14,7 +14,7 @@
                                 </span>
 
                                 <span class="nb-unit">
-                                    {{sensor.unit}}
+                                    {{sensor.unit.symbol}}
                                 </span>
                             </div>
                         </v-card>
@@ -26,43 +26,39 @@
 </template>
 
 <script>
-  export default {
-    props: {
-      source: String,
-    },
-    data: () => ({
-      drawer: false,
-      sensors: [
-        {
-          id: '1',
-          name: 'hot liquor tank',
-          value: '78',
-          unit: '°C',
-        },
-        {
-          id: '2',
-          name: 'mash tun',
-          value: '26',
-          unit: '°C',
-        },
-        {
-          id: '3',
-          name: 'boil kettle',
-          value: '55',
-          unit: '°C',
-        },
-        {
-          id: '3',
-          name: 'boil pressure',
-          value: '55',
-          unit: 'PSI',
-        },
-      ]
-    }),
-    created () {
-      this.$vuetify.theme.dark = true
-    },
+import axios from 'axios'
+
+export default {
+  props: {
+    source: String,
+  },
+  data: () => ({
+    drawer: false,
+    sensors: {}
+  }),
+  created () {
+    this.$vuetify.theme.dark = true
+
+  },
+  mounted() {
+    axios.get('http://127.0.0.1:5300/sensors')
+      .then(response => {
+        this.sensors = response.data
+      })
+
+      this.$options.sockets.onmessage = (data) => {
+        const incoming_event = JSON.parse(data.data);
+        const sensor_id = incoming_event.sensor_id
+
+        this.sensors[sensor_id].value = incoming_event.value
+      }
+  },
+  methods: {
+    clickButton: function() {
+      this.$socket.send('Hello')
+    }
   }
+}
 </script> 
 
 <style scoped lang="scss">
