@@ -6,7 +6,6 @@
                     <v-col v-for="(sensor, key) in sensors" :key="key" cols="12" sm="6" md="3" lg="3">
                         <v-card class="ma-3 pa-4 nb-card" tile>
                             <h2>{{sensor.name}}</h2>
-                            <!-- TODO: Add folding menu here. -->
 
                             <div class="nb-measurement py-4">
                                 <span class="nb-value">
