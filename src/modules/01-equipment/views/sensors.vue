@@ -115,7 +115,7 @@ export default {
 
     axios.get("http://127.0.0.1:5300/sensor_types").then(response => {
       this.sensor_types = Object.values(response.data);
-    });
+    })
   },
   methods: {
     editItem(item) {
