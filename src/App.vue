@@ -8,7 +8,7 @@
     >
       <v-list>
         <template v-for="(module, index) in modules">
-          <v-list-item :key="index" :to="{name: module.link}" exact>
+          <v-list-item :key="index" :to="{name: module.link}" exact :hidden="module.hidden">
             <v-list-item-content>
               <v-list-item-title>{{module.name}}</v-list-item-title>
             </v-list-item-content>
